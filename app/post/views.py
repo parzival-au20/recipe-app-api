@@ -60,7 +60,7 @@ class CommentViewSet(viewsets.ModelViewSet):
                 {"detail": "Belirtilen post_id'ye sahip bir post bulunamadı."},
                 status=404
             )
-        comments = Comment.objects.filter(post__id=pk)
+        comments = Comment.objects.filter(postId=pk)
 
         serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data)
