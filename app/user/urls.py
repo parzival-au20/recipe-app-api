@@ -3,7 +3,7 @@ URL mappings for user API
 """
 # user/urls.py
 
-from django.urls import path, include
+from django.urls import path
 from rest_framework.routers import DefaultRouter
 from user.views import UserViewSet, CreateTokenView
 

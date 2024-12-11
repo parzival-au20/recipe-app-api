@@ -9,8 +9,6 @@ from django.urls import reverse
 from rest_framework.test import APIClient
 
 
-
-
 class PostTests(APITestCase):
 
     def setUp(self):
@@ -95,7 +93,7 @@ class PostTests(APITestCase):
 
     def test_invalid_user_id(self):
         """Geçersiz user_id ile yorum alma."""
-        url = f'/api/comments/9999/filter-by-post/'  # Böyle bir post id'si olmayacak
+        url = '/api/comments/9999/filter-by-post/'  # Böyle bir post id'si olmayacak
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
         self.assertEqual(response.data['detail'], "Belirtilen post_id'ye sahip bir post bulunamadı.")

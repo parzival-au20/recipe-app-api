@@ -41,12 +41,14 @@ class Company(models.Model):
     def __str__(self):
         return self.name
 
+
 class Geo(models.Model):
     lat = models.DecimalField(max_digits=12, decimal_places=9, blank=True)
     lng = models.DecimalField(max_digits=12, decimal_places=9, blank=True)
 
     def __str__(self):
         return f"({self.lat}, {self.lng})"
+
 
 class Address(models.Model):
     """Address details."""
@@ -58,6 +60,7 @@ class Address(models.Model):
 
     def __str__(self):
         return f"{self.street}, {self.city}"
+
 
 class User(AbstractBaseUser, PermissionsMixin):
     """ User in the system."""
@@ -77,6 +80,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
+
 
 class Post(models.Model):
     user = models.ForeignKey(
@@ -128,6 +132,7 @@ class Album(models.Model):
     def __str__(self):
         return self.title
 
+
 class Photo(models.Model):
     albumId = models.ForeignKey(Album, related_name="photos", on_delete=models.CASCADE)
     user = models.ForeignKey(
@@ -140,7 +145,6 @@ class Photo(models.Model):
     title = models.CharField(max_length=255)
     url = models.URLField()
     thumbnailUrl = models.URLField()
-
 
     def __str__(self):
         return f"Album on {self.albumId.title}"

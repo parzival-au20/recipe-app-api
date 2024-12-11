@@ -7,12 +7,13 @@ from album.serializers import AlbumSerializer, PhotoSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
+
 class AlbumViewSet(viewsets.ModelViewSet):
     """Manage Album in the database."""
     queryset = Album.objects.all()
     serializer_class = AlbumSerializer
     authentication_classes = [authentication.TokenAuthentication]
-    permission_classes = [permissions.IsAuthenticated]  # Sadece giriş yapan kullanıcılar görebilir.
+    permission_classes = [permissions.IsAuthenticated]
 
     def perform_create(self, serializer):
         """Create a new album."""
@@ -24,7 +25,6 @@ class AlbumViewSet(viewsets.ModelViewSet):
         album = self.get_object()
         photos = album.photos.all()  # İlgili photos al
         return Response(PhotoSerializer(photos, many=True).data)
-
 
     @action(detail=True, methods=['get'], url_path='user_albums')
     def user_albums(self, request, pk=None):

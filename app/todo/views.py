@@ -32,4 +32,3 @@ class ToDoViewSet(viewsets.ModelViewSet):
         # Serileştirme işlemi
         serializer = ToDoSerializer(todos, many=True)
         return Response(serializer.data)
-

@@ -1,25 +1,19 @@
 """
 Serializers for the posts API View
 """
-from django.contrib.auth import  authenticate
 
-from django.utils.translation import gettext as _
 from core.models import Post, Comment
-
-from rest_framework.decorators import action
-from rest_framework.response import Response
 from rest_framework import serializers
 
 
 class PostSerializer(serializers.ModelSerializer):
     """ Serializer for the post object."""
-    #comments = serializers.StringRelatedField(many=True, read_only=True)
+    # comments = serializers.StringRelatedField(many=True, read_only=True)
     userId = serializers.CharField(source='user.id', read_only=True)
 
     class Meta:
         model = Post
-        fields = ['userId','id', 'title', 'body']
-
+        fields = ['userId', 'id', 'title', 'body']
 
 
 class CommentSerializer(serializers.ModelSerializer):

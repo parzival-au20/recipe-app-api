@@ -7,6 +7,7 @@ from post.serializers import PostSerializer, CommentSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
+
 class PostViewSet(viewsets.ModelViewSet):
     """Manage posts in the database."""
     queryset = Post.objects.all()
@@ -24,7 +25,6 @@ class PostViewSet(viewsets.ModelViewSet):
         post = self.get_object()
         comments = post.comments.all()  # İlgili yorumları al
         return Response(CommentSerializer(comments, many=True).data)
-
 
     @action(detail=True, methods=['get'], url_path='user_posts')
     def user_posts(self, request, pk=None):
@@ -51,6 +51,7 @@ class CommentViewSet(viewsets.ModelViewSet):
         """Create a new comment."""
         user = self.request.user  # Oturum açmış kullanıcıyı alıyoruz
         serializer.save(user=user)
+
     @action(detail=True, methods=['get'], url_path='filter-by-post')
     def filter_by_post(self, request, pk=None):
         """Filter comments by post ID."""

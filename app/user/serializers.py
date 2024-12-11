@@ -1,7 +1,7 @@
 """
 Serializers for the user API View
 """
-from django.contrib.auth import  authenticate
+from django.contrib.auth import authenticate
 
 from django.utils.translation import gettext as _
 from core.models import User, Address, Company, Geo
@@ -12,7 +12,6 @@ from rest_framework import serializers
 class GeoSerializer(serializers.ModelSerializer):
     lat = serializers.DecimalField(max_digits=12, decimal_places=9)
     lng = serializers.DecimalField(max_digits=12, decimal_places=9)
-
 
     class Meta:
         model = Geo
@@ -42,7 +41,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['email', 'password', 'name', 'username', 'address', 'phone', 'website', 'company']
-        extra_kwargs = {'password':{'write_only':True, 'min_length': 5}}
+        extra_kwargs = {'password': {'write_only': True, 'min_length': 5}}
 
     def create(self, validated_data):
         """Create and return a user with encrypted password."""
@@ -95,6 +94,7 @@ class UserSerializer(serializers.ModelSerializer):
         address = Address.objects.create(**address_data, geo=geo_instance)
         user.address = address
         user.save()
+
     def _handle_company_creation(self, user, company_data):
         """Handle the creation of a company and associate with user."""
         company = Company.objects.create(**company_data)
